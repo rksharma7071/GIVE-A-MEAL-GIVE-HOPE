@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block image_slider %}{% endblock image_slider %}
+{% block main %}
+<main class="">
+    <section class=" ">
+        <div class="container pt-3">
+            <div class="row">
+                <div class="col col-lg-6 col-md-auto my-5">
+                    <h1 class="text-center text-xl-start"><strong>Create Account</strong></h1>
+                    <p class="text-center text-xl-start pb-3 mb-3">Already have an account? <a href="{% url 'loginView' %}">Sign in here.</a></p>
+
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            {% comment %} <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>                             {% endcomment %}
+                            <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show" {% endif %} role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <form class="" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-floating  mb-4">
+                                    {% comment %} <label class="form-label" for="inputGroupSelect01">Select Type</label> {% endcomment %}
+                                    <select class="form-select" id="inputGroupSelect01">
+                                      <option selected>Select</option>
+                                      <option value="3">Donate</option>
+                                      <option value="ngo">Non Governmental Organization</option>
+                                      <option value="res">Restaurant</option>
+                                    </select>
+                                  </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="position-relative mb-4">
+                                    <label for="name" class="form-label fs-base">Full name</label>
+                                    <input type="text" id="name" class="form-control form-control-lg" name="first_name" required>
+                                    {% comment %} <div class="invalid-feedback position-absolute start-0 top-100">Please enter your name!</div> {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="position-relative mb-4">
+                                    <label for="email" class="form-label fs-base">Email</label>
+                                    <input type="email" id="email" class="form-control form-control-lg" name ='email' required>
+                                    {% comment %} <div class="invalid-feedback position-absolute start-0 top-100">Please enter a valid email address!</div> {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="position-relative mb-4">
+                                    <label for="password" class="form-label fs-base">Password</label>
+                                    <div class="password-toggle">
+                                        <input type="password" id="password" class="form-control form-control-lg" name="password" required>
+                                        {% comment %} <div class="invalid-feedback position-absolute start-0 top-100" id="password">Please enter a password!</div> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="position-relative mb-4">
+                                    <label for="password-confirm" class="form-label fs-base">Confirm password</label>
+                                    <div class="password-toggle">
+                                        <input type="password" id="password-confirm" class="form-control form-control-lg" name="confirm_password" required>
+                                        {% comment %} <div class="invalid-feedback position-absolute start-0 top-100" id="password-confirm">Please enter a password!</div> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <div class="position-relative mb-4">
+                                    <input type="checkbox" id="terms" class="form-check-input">
+                                    <label for="terms" class="form-check-label fs-base">I agree to <a href="#">Terms &amp; Conditions</a></label>
+                                    {% comment %} <div class="invalid-feedback position-absolute start-0 top-100" id="terms">Please Agree the Terms and Conditions</div> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary shadow-primary btn-lg w-100">Sign up</button>
+                    </form>
+
+                    <hr class="my-4">
+                    <h6 class="text-center mb-4">Or sign up with your social network</h6>
+                    <div class="row row-cols-1 row-cols-sm-2">
+                        <div class="col mb-3">
+                            <a href="#" class="btn btn-icon btn-google btn-lg w-100">
+                                <img src="{% static 'img/google.png' %}" alt="" height="40px">
+                            </a>
+                        </div>
+                        <div class="col mb-3">
+                            <a href="#" class="btn btn-icon btn-facebook btn-lg w-100">
+                                <img src="{% static 'img/facebook.png' %}" alt="" height="40px">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-lg-6 col-md-auto d-none d-lg-block d-xl-block">
+                    <img src="{% static 'img/login.gif' %}" alt="" width="100%">
+                </div>
+            </div>      
+        </div>
+    </section>
+</main>
+<script type='text/javascript'>document.addEventListener('DOMContentLoaded', function () {window.setTimeout(document.querySelector('svg').classList.add('animated'),1000);})</script>
+  {% endblock main %}
