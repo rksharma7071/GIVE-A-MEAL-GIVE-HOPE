@@ -13,29 +13,46 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-9 col-lg-6 col-xl-4">
-                    <div class="card shadow-lg o-hidden border-0 my-5 rounded-3">
-                        <div class="card-body p-0 "><div class="row">
+                    <div class="card shadow-lg o-hidden border-0 my-5">
+                        <div class="card-body p-0"><div class="row">
                             <div class="col">
-                                <div class="p-5">
+                                <div class="p-4">
                                     <div class="text-center">
-                                        <h4 class="text-dark mb-4">Login</h4>
+                                        <h4 class="text-dark mb-4">Signup</h4>
                                         {% if messages %}
                                             {% for message in messages %}
                                                 <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %}">{{ message }}</p>
                                             {% endfor %}
                                         {% endif %}
                                     </div>
-
-                                    <form class="user" method="post">
+                                    <form class="user" method="post"> 
                                         {% csrf_token %}
-                                        <div class="mb-3">
-                                            <input class="form-control form-control-user" type="text" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email">
+                                        <div class="form-group mb-3">
+                                            <select class="form-control" name="organization" >
+                                                <option selected>Select Your Profile</option>
+                                                <option value="1">Non-Governmental Organization</option>
+                                                <option value="2">Restaurant</option>
+                                                <option value="3">Donator</option>
+                                            </select>
                                         </div>
-                                        <div class="mb-3">
-                                            <input class="form-control form-control-user" type="password" id="password" placeholder="Password" name="password">
+                                        <div class="form-group mb-3">
+                                            {% comment %} <label for="first_name">First Name</label> {% endcomment %}
+                                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            {% comment %} <label for="email">Email</label> {% endcomment %}
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            {% comment %} <label for="password">Password</label> {% endcomment %}
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            {% comment %} <label for="confirm_password">Confirm Password</label> {% endcomment %}
+                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Enter Confirm Password" required>
                                         </div>
                                         <div class="form-check mb-3">
-                                            <input type="checkbox" class="form-check-input" id="terms" name="terms">
+                                            <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
                                             <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
                                         </div>
                                         
