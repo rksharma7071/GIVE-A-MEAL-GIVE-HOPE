@@ -1,0 +1,39 @@
+{% extends 'dashboard1.html' %}
+
+{% block main %}
+
+    <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
+        <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-5 fw-semibold">Food Donate</span>
+    </a>
+
+    <div class="px-5 py-4 ">
+        <form method="post">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            
+            
+            {{ form.as_p }}
+
+
+            {% comment %} {{form.donator_name.label}}
+            {{form.donator_name}}
+            {% if form.donator_name.errors %}
+            <ul class="errorlist">
+                {% for error in form.donator_name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endcomment %}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Donate Now</button>
+            </div>
+        
+        </form>
+    </div>
+
+{% endblock main %}

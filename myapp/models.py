@@ -23,3 +23,17 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=200, default=True)
     phone_number = models.CharField(max_length=20, default=True)
     email_id = models.EmailField(max_length=30, default=True)
+
+
+
+class Donation(models.Model):
+    donator_name = models.CharField(max_length=255)
+    food_type = models.CharField(max_length=255)
+    quantity = models.IntegerField()
+    expiry_date = models.DateField()
+    pickup_time = models.TimeField()
+    pickup_location = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.donator_name

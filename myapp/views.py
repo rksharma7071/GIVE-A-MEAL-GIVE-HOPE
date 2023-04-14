@@ -4,7 +4,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Restaurant, NGO
-
+from .forms import *
 
 
 def home(request):
@@ -42,12 +42,17 @@ def donate(request):
 #     return render(request, 'dashboard.html', locals())
 
 @login_required(redirect_field_name='loginView',login_url='loginView')
-def dashboard(request):
+def dashboard1(request):
     return render(request, 'dashboard1.html', locals())
+
+@login_required(redirect_field_name='loginView',login_url='loginView')
+def dashboard(request):
+    donations = Donation.objects.all()
+    return render(request, 'dashboard.html', locals())
 
 def loginView(request):
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('dashboard1')
     if request.method == 'POST':
 
         username = request.POST.get('email')
@@ -61,7 +66,7 @@ def loginView(request):
 
                 else:
                     login(request, user)
-                    return redirect('dashboard')
+                    return redirect('dashboard1')
             except Exception as e:
                 messages.error(request, f'{e}')
         else:
@@ -116,3 +121,20 @@ def registerView(request):
         return redirect('loginView')
 
     return render(request, 'registerView.html')
+
+
+def food_donation(request):
+
+
+    form = DonationForm()
+
+    if request.method == 'POST':
+        form = DonationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('donation_success')
+    else:
+        form = DonationForm()
+        
+
+    return render(request, 'food_donation.html', locals())

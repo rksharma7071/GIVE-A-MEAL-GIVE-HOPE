@@ -31,6 +31,8 @@ urlpatterns = [
     path('registerView/', views.registerView, name='registerView'),
     path('loginView/', views.loginView, name='loginView'),
     path('logoutView/', views.logoutView, name='logoutView'),
+    path('dashboard1/', views.dashboard1, name='dashboard1'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('food_donation/', views.food_donation, name='food_donation'),
     
 ]
