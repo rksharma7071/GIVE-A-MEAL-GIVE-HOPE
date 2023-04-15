@@ -9,103 +9,10 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     
 
-    {% comment %} <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous"> {% endcomment %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-        .navbar{
-            font-family: 'Roboto', sans-serif;
-        } 
-
-        .img_fist {
-            max-height: 400px;
-            max-width: 100%;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-          }
-          
-          h2 {
-            color: #343a40;
-          }
-          
-          p {
-            color: #6c757d;
-          }
-         .wave_section {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background: #3586ff;
-            overflow: hidden;
-         }
-         .wave_section .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url('{% static 'img/wave.png' %}');
-            background-size:1000px 100px;
-         }
-
-         .wave_section .wave.wave1{
-            animation: animate 30s linear infinite;
-            z-index: 1000;
-            opacity: 1;
-            animation-delay: 0s;
-            bottom:0;
-         }
-         .wave_section .wave.wave2{
-            animation: animate2 15s linear infinite;
-            z-index: 999;
-            opacity: 0.5;
-            animation-delay: -5s;
-            bottom:10px;
-         }
-         .wave_section .wave.wave3{
-            animation: animate 15s linear infinite;
-            z-index: 998;
-            opacity: 0.2;
-            animation-delay: -2s;
-            bottom:15;
-         }
-         .wave_section .wave.wave4{
-            animation: animate2 15s linear infinite;
-            z-index: 997;
-            opacity: 0.7;
-            animation-delay: -5s;
-            bottom:20px;
-         }
-         @keyframes animate {
-            0%{
-                background-position-x:0 ;
-            }
-            100%{
-                background-position-x:1000px ;
-            }
-         }
-         @keyframes animate2 {
-            0%{
-                background-position-x:0 ;
-            }
-            100%{
-                background-position-x:-1000px ;
-            }
-         }
-         .wave_section {
-            background: linear-gradient(to bottom, #00b4db, #0083b0);
-            position: relative;
-          }
-          .img_fist {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            display: block;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-          }
-
-          
-          
-        </style>
+    
+    
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -146,29 +53,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto pe-3">
-                    <li class="nav-item px-2"><a class="nav-link"  href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item px-2"><a class="nav-link" href="{% url 'why_us' %}">Why Us</a></li>
-                    
-                    <li class="nav-item dropdown px-2" data-bs-hover="dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Work</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'food_for_all' %}">Food For All </a></li>
-                            <li><a class="dropdown-item" href="{% url 'zero_food_wastage' %}">Zero Food Wastage</a></li>
-                            <li><a class="dropdown-item" href="{% url 'community_fridge' %}">Community Fridge</a></li>
-                            <li><a class="dropdown-item" href="{% url 'meals_on_wheele' %}">Meals On Wheele</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item dropdown px-2">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Support</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'our_program' %}">Our Programs</a></li>
-                            <li><a class="dropdown-item" href="{% url 'our_donators' %}">Our Donators</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item px-2"><a class="nav-link" href="{% url 'about_us' %}">About Us</a></li>
-                    <li class="nav-item px-2"><a class="nav-link" href="{% url 'donate' %}">Donate</a></li>
-                    <li class="nav-item px-2"><a class="nav-link  " href="{% url 'loginView' %}">Login</a></li>
+                    <li class="nav-item px-2"><a class="nav-link " aria-current="page" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item px-2"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="nav-item px-2"><a class="nav-link" href="{% url 'food_donation' %}">Food Donation</a></li>
+                    <li class="nav-item px-2"><a class="nav-link" href="{% url 'history' %}">History</a></li>
+                    <li class="nav-item px-2"><a class="nav-link  " href="{% url 'profile' %}">Profile</a></li>
+                    <li class="nav-item px-2"><a class="nav-link  " href="{% url 'logoutView' %}">Sign Out</a></li>
                 </ul>
             </div>
         </div>
@@ -177,7 +67,7 @@
     {% endblock header %}
 
     <!-- Carousel / Image Slider Started -->
-    {% block image_slider %}
+    {% comment %} {% block image_slider %}
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -208,7 +98,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    {% endblock image_slider %}
+    {% endblock image_slider %} {% endcomment %}
     <!-- Carousel / Image Slider Ended -->
     
 

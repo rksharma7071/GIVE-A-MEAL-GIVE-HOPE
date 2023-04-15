@@ -14,5 +14,5 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 @admin.register(Donation)
 class DonationAdmin(admin.ModelAdmin):
-    list_display = ('donator_name', 'food_type', 'quantity', 'expiry_date', 'pickup_time', 'pickup_location')
+    list_display = ('donator_name', 'food_type', 'quantity', 'expiry_date', 'pickup_time', 'pickup_location', 'action')
     

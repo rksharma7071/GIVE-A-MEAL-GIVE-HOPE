@@ -37,22 +37,30 @@ def about_us(request):
 def donate(request):
     return render(request, 'donate.html')
 
-# @login_required(redirect_field_name='loginView',login_url='loginView')
-# def dashboard(request):
-#     return render(request, 'dashboard.html', locals())
+@login_required(redirect_field_name='loginView',login_url='loginView')
+def dashboard(request):
+    return render(request, 'dashboard.html', locals())
+
+
+
 
 @login_required(redirect_field_name='loginView',login_url='loginView')
-def dashboard1(request):
-    return render(request, 'dashboard1.html', locals())
+def main(request):
+    # ngo = request.user.groups.filter(name='ngo').exists
+    # donator = request.user.groups.filter(name='donator').exists
+
+    # donations = Donation.objects.all().order_by('-created_at')
+    return render(request, 'main.html', locals())
+
 
 @login_required(redirect_field_name='loginView',login_url='loginView')
 def dashboard(request):
-    donations = Donation.objects.all()
+    
     return render(request, 'dashboard.html', locals())
 
 def loginView(request):
     if request.user.is_authenticated:
-        return redirect('dashboard1')
+        return redirect('dashboard')
     if request.method == 'POST':
 
         username = request.POST.get('email')
@@ -66,7 +74,7 @@ def loginView(request):
 
                 else:
                     login(request, user)
-                    return redirect('dashboard1')
+                    return redirect('main')
             except Exception as e:
                 messages.error(request, f'{e}')
         else:
@@ -79,6 +87,7 @@ def logoutView(request):
     return redirect('home')
 
 
+@login_required(redirect_field_name='loginView',login_url='loginView')
 def registerView(request):
     if request.method == 'POST':
         organization = request.POST['organization']
@@ -122,19 +131,35 @@ def registerView(request):
 
     return render(request, 'registerView.html')
 
-
+@login_required(redirect_field_name='loginView',login_url='loginView')
 def food_donation(request):
-
-
-    form = DonationForm()
-
     if request.method == 'POST':
         form = DonationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('donation_success')
+            messages.success(request, 'Food Donation placed successfully!')
+            return redirect('food_donation')
     else:
         form = DonationForm()
         
 
     return render(request, 'food_donation.html', locals())
+
+
+
+@login_required(redirect_field_name='loginView',login_url='loginView')
+def donation_record(request):
+    pass
+
+
+
+def profile(request):
+    return render(request, 'profile.html')
+
+
+def history(request):
+    ngo = request.user.groups.filter(name='ngo').exists
+    donator = request.user.groups.filter(name='donator').exists
+
+    donations = Donation.objects.all().order_by('-created_at')
+    return render(request, 'history.html', locals())

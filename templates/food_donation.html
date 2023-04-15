@@ -1,39 +1,43 @@
-{% extends 'dashboard1.html' %}
-
+{% extends 'main.html' %}
+{% block image_slider %}{% endblock image_slider %}
 {% block main %}
 
-    <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
-        <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-5 fw-semibold">Food Donate</span>
-    </a>
 
-    <div class="px-5 py-4 ">
-        <form method="post">
-            {% csrf_token %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %}">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-            
-            
-            {{ form.as_p }}
-
-
-            {% comment %} {{form.donator_name.label}}
-            {{form.donator_name}}
-            {% if form.donator_name.errors %}
-            <ul class="errorlist">
-                {% for error in form.donator_name.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %} {% endcomment %}
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Donate Now</button>
+    <div class="container py-3">
+        <div class="row py-4">
+            <div class="col-5">
+                <div class="card">
+                    <h4 align='center'>Food Donate</h4>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        {{ form.as_p }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Donate Now</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        
-        </form>
+            <div class="col-7">
+                <div class="card p-3" >
+                  <div class="card-body ">
+                    <h5 class="card-title">Share the Bounty: The Power of Food Donation</h5>
+                  <p class="card-text lead" style="text-align: justify;">Having a purpose in our lives is very important. Life without purpose is a meaningless journey. Therefore, it is very important for us to have a purpose in our lives.</p>
+                  <p class="card-text" style="text-align: justify;">Failure is a common thing in life. But we should not give up on failure. We should always keep trying and remain fully committed to our goals. Therefore, having a purpose in life leads us towards success.</p>
+                  <p class="card-text" style="text-align: justify;">Walking with a purpose in our lives gives us a new dimension. We should adopt the purpose of life to make life more important. Therefore, we should try to make life more meaningful by adopting a purpose.</p>
+                  <p class="card-text" style="text-align: justify;">Some things in life are not as important as we make them out to be. We must express our thoughts and take the time to explain our opinions to others. We should give ourselves permission to live our lives independently so that we can fulfill our dreams. When we learn from our failures, we gain a new perspective and help ourselves move towards success. Therefore, we should always stay positive in our lives and keep moving forward. These are the real objectives of our lives.</p>
+                  </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+
 
 {% endblock main %}
