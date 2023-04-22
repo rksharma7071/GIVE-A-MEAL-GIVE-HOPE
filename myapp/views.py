@@ -5,58 +5,35 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Restaurant, NGO
 from .forms import *
+from django.core.mail import send_mail
+from django.contrib.auth import views as auth_views
+from django.http import HttpResponse
 
 
-def home(request):
+def home(request): 
     return render(request, 'home.html')
+
 
 def why_us(request):
     return render(request, 'why_us.html')
 
-def food_for_all(request):
-    return render(request, 'food_for_all.html')
-
-def zero_food_wastage(request):
-    return render(request, 'zero_food_wastage.html')
-
-def community_fridge(request):
-    return render(request, 'community_fridge.html')
-
-def meals_on_wheele(request):
-    return render(request, 'meals_on_wheele.html')
 
 def our_program(request):
     return render(request, 'our_program.html')
 
+
 def our_donators(request):
     return render(request, 'our_donators.html')
+
 
 def about_us(request):
     return render(request, 'about_us.html')
 
-def donate(request):
-    return render(request, 'donate.html')
 
 @login_required(redirect_field_name='loginView',login_url='loginView')
-def dashboard(request):
+def dashboard(request):    
     return render(request, 'dashboard.html', locals())
 
-
-
-
-@login_required(redirect_field_name='loginView',login_url='loginView')
-def main(request):
-    # ngo = request.user.groups.filter(name='ngo').exists
-    # donator = request.user.groups.filter(name='donator').exists
-
-    # donations = Donation.objects.all().order_by('-created_at')
-    return render(request, 'main.html', locals())
-
-
-@login_required(redirect_field_name='loginView',login_url='loginView')
-def dashboard(request):
-    
-    return render(request, 'dashboard.html', locals())
 
 def loginView(request):
     if request.user.is_authenticated:
@@ -74,12 +51,13 @@ def loginView(request):
 
                 else:
                     login(request, user)
-                    return redirect('main')
+                    return redirect('dashboard')
             except Exception as e:
                 messages.error(request, f'{e}')
         else:
             messages.error(request, 'Please indicate that you accept the Terms and Conditions.')
     return render(request, 'login.html', locals())
+
 
 login_required(redirect_field_name='loginView', login_url='loginView')
 def logoutView(request):
@@ -87,7 +65,6 @@ def logoutView(request):
     return redirect('home')
 
 
-@login_required(redirect_field_name='loginView',login_url='loginView')
 def registerView(request):
     if request.method == 'POST':
         organization = request.POST['organization']
@@ -131,7 +108,7 @@ def registerView(request):
 
     return render(request, 'registerView.html')
 
-@login_required(redirect_field_name='loginView',login_url='loginView')
+
 def food_donation(request):
     if request.method == 'POST':
         form = DonationForm(request.POST)
@@ -141,16 +118,13 @@ def food_donation(request):
             return redirect('food_donation')
     else:
         form = DonationForm()
-        
 
     return render(request, 'food_donation.html', locals())
-
 
 
 @login_required(redirect_field_name='loginView',login_url='loginView')
 def donation_record(request):
     pass
-
 
 
 def profile(request):
@@ -163,3 +137,21 @@ def history(request):
 
     donations = Donation.objects.all().order_by('-created_at')
     return render(request, 'history.html', locals())
+
+
+def reset_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        users = User.objects.filter(email=email)
+        if users.exists():
+            for user in users:
+                send_mail('Reset Your Password',f'Follow this link to reset your password: http://localhost:8000/reset/{str(user.pk)}/','rksharma7071@gmail.com',[email],fail_silently=False,)
+            messages.success(request, 'Password reset email has been sent')
+        else:
+            messages.error(request, 'User does not exist')
+    return render(request, 'reset_password.html')
+
+
+def password_reset_confirm(request, uidb64, token):
+    return auth_views.PasswordResetConfirmView.as_view()(request, uidb64=uidb64, token=token, template_name='password_reset_confirm.html')
+

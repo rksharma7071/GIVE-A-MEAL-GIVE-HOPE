@@ -23,6 +23,21 @@ STATIC_DIR = BASE_DIR / 'static'
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-27^dk9ysof%+r7zxf=d9-i4+k!g646+9pz5j)9etrwpqtw3wg2'
 
+
+
+
+
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '127.0.0.1'  # replace with your SMTP server
+EMAIL_PORT = 587  # replace with the SMTP port used by your email provider
+EMAIL_USE_TLS = True  # use TLS encryption for secure connections
+EMAIL_HOST_USER = 'rksharma7071@gmail.com'  # replace with your SMTP username
+EMAIL_HOST_PASSWORD = '*Sharma01#'  # replace with your SMTP password
+DEFAULT_FROM_EMAIL = 'Your Name <rksharma7071@gmail.com>'
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -123,3 +138,4 @@ STATICFILES_DIRS = [STATIC_DIR]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

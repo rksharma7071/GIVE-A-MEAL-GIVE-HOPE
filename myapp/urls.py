@@ -14,26 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
 from myapp import views
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('why_us/', views.why_us, name='why_us'),
-    path('food_for_all/', views.food_for_all, name='food_for_all'),
-    path('zero_food_wastage/', views.zero_food_wastage, name='zero_food_wastage'),
-    path('community_fridge/', views.community_fridge, name='community_fridge'),
-    path('meals_on_wheele/', views.meals_on_wheele, name='meals_on_wheele'),
     path('our_program/', views.our_program, name='our_program'),
     path('our_donators/', views.our_donators, name='our_donators'),
     path('about_us/', views.about_us, name='about_us'),
-    path('donate/', views.donate, name='donate'),
+    
     path('registerView/', views.registerView, name='registerView'),
     path('loginView/', views.loginView, name='loginView'),
     path('logoutView/', views.logoutView, name='logoutView'),
+    
     path('dashboard/', views.dashboard, name='dashboard'),
     path('food_donation/', views.food_donation, name='food_donation'),
     path('profile/', views.profile, name='profile'),
     path('history/', views.history, name='history'),
+
+    path('reset_password/', views.reset_password, name='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', views.password_reset_confirm, name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
+
+
+
     
 ]
+
+
