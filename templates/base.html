@@ -33,7 +33,6 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background: #3586ff;
             overflow: hidden;
          }
          .wave_section .wave {
@@ -91,7 +90,7 @@
             }
          }
          .wave_section {
-            background: linear-gradient(to bottom, #00b4db, #0083b0);
+<!--            background: linear-gradient(to bottom, #00b4db, #0083b0);-->
             position: relative;
           }
           .img_fist {
@@ -142,12 +141,11 @@
 
       {% block header %}
     <!-- Navbar Header Started -->
-    
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow"  style="background-color:rgba(211, 255, 252, 1);">
+        <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
                 {% comment %} <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> {% endcomment %}
-                <strong>GIVE A MEAL GIVE HOPE</strong>
+               <h2> <strong>अन्न-Kosh</strong></h2>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -195,8 +193,8 @@
 
     <!-- Carousel / Image Slider Started -->
     {% block image_slider %}
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    <div id="carouselExampleAutoplaying" class="carousel slide container-fluid " data-bs-ride="carousel" style="background-color:rgba(211, 255, 252, 1);">
+        <div class="carousel-inner container">
             <div class="carousel-item active">
                 <img src="{% static 'img/img1.jpg' %}" class="d-block w-100" alt="..." style="">
             </div>
@@ -232,7 +230,7 @@
     {% block main %}{% endblock main %}
 
     <!-- Footer Started-->
-    <div class="container">
+    <div class="container bg-white">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3  border-top">
             <div class="col-md-4 d-flex align-items-center">
                 <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
